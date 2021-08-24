@@ -16,7 +16,10 @@ Pentru testarea functionalitatilor va puteti folosi de interfata swagger:
 [http://localhost:8080/swagger-ui/#/](http://localhost:8080/swagger-ui/#/)
 
 ## Cerinte:
-- [x] Determinați atributele (Id, Code, etc.) și relațiile (1:n, n:m) necesare pentru entități.
+- [x] Determinați atributele (Id, Code, etc.) și relațiile (1:n, n:m) necesare pentru entități.  
+  Baza de date a fost proiectata dupa cerintele puse. Au fost create 5 tabele: __Numerar__(semnifica valuta straina pusa la dizpozitia
+  unui operator)__Valuta__, __Operator__, __SchimbValutar__ si __CursValutar__.
+  Detalii pot fi vazute prin intermediul [pgadmin4](http://localhost:5050) email: _admin@admin.com_, parola: _password_
 - [x] Definiți constrângerile pentru schema bazei de date (chei primare, chei externe, constrângeri de unicitate).
 - [x] Utilizând limbajul SQL,
   - [x] creați tabelele bazei de date; (fisierul src/main/resources/db/migration/create-tables.sql)
