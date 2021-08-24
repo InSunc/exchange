@@ -1,6 +1,6 @@
 create table valuta (
 	id serial primary key,
-	cod varchar
+	cod varchar unique
 );
 
 create table curs_valutar (
@@ -27,7 +27,9 @@ create table numerar (
 
 create table schimb_valutar (
 	id serial primary key,
-	suma float,
+	suma_primita float,
+	suma_eliberata float,
+	curs_valutar_id int references curs_valutar(id),
 	valuta_id int references valuta(id),
 	operator_id int references "operator"(id),
 	"data" date not null

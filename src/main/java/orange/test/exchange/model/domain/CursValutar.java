@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CursValutar {
     @Id
-    Long id;
+    Integer id;
 
     Integer valutaId;
 

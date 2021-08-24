@@ -22,16 +22,11 @@ public class CursValutarService {
 
     @Transactional
     public Mono<CursValutar> create(CursValutar cursValutar, String codValuta) {
-
-        Mono<CursValutar> cursValutarMono = Mono.just(cursValutar);
-
-        cursValutarMono = cursValutarMono.zipWith(valutaRepository.findByCod(codValuta))
-                .map(tuple -> {
-                    cursValutar.setValutaId(tuple.getT2().getId());
-                    return tuple.getT1();
-                }).then(cursValutarRepository.save(cursValutar));
-
-        return cursValutarMono;
+        return valutaRepository.findByCod(codValuta).flatMap(valuta -> {
+            cursValutar.setValutaId(valuta.getId());
+            cursValutar.setValuta(valuta);
+            return cursValutarRepository.save(cursValutar);
+        }).switchIfEmpty(Mono.error(new IllegalArgumentException("Valuta inexistenta!")));
     }
 
     @Transactional

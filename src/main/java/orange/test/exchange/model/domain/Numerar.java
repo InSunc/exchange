@@ -1,7 +1,7 @@
 package orange.test.exchange.model.domain;
 
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -11,16 +11,24 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 
-@Data
 @Table
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class Numerar {
     @Id
-    Long id;
+    Integer id;
 
     Integer valutaId;
+    Integer operatorId;
+
     @Transient
     Valuta valuta;
+
     float suma;
+
+    @Transient
     Operator operator;
 
     @Column

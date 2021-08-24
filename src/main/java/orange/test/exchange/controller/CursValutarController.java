@@ -1,5 +1,6 @@
 package orange.test.exchange.controller;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import orange.test.exchange.mapper.CursValutarMapper;
 import orange.test.exchange.model.domain.CursValutar;
@@ -12,7 +13,8 @@ import reactor.core.publisher.Mono;
 
 
 @CrossOrigin("*")
-@RestController("/curs")
+@RestController
+@RequestMapping(value = "/curs")
 @RequiredArgsConstructor
 public class CursValutarController {
 
@@ -20,13 +22,16 @@ public class CursValutarController {
     private final CursValutarService cursValutarService;
 
 
+    @ApiOperation("Inserare curs valutar")
     @PostMapping
     public Mono<ResponseEntity<Void>> create(@RequestBody final NewCursValutarDTO curs) {
         CursValutar cursValutar = cursValutarMapper.toEntity(curs);
-        return cursValutarService.create(cursValutar, curs.getCodValuta()).map(c -> ResponseEntity.ok().build());
+        return cursValutarService.create(cursValutar, curs.getCodValuta().toUpperCase())
+                .map(c -> ResponseEntity.ok().build());
     }
 
-    @GetMapping("{codValuta}")
+    @ApiOperation("Primire curs")
+    @GetMapping("/{codValuta}")
     public Mono<CursValutarDTO> getAll(@PathVariable String codValuta) {
         return cursValutarService.getByValuta(codValuta.toUpperCase()).map(cursValutarMapper::toDto);
     }
